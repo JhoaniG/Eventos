@@ -37,8 +37,8 @@ public class UsuarioController {
     }
 
     // DELETE: http://localhost:8080/api/usuarios/1
-    @DeleteMapping
-    public ResponseEntity<Void>eliminar(Long id){
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void>eliminar(@PathVariable Long id){
         usuarioServicio.eliminar(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 
