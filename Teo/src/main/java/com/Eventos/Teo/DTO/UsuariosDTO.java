@@ -1,9 +1,5 @@
 package com.Eventos.Teo.DTO;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import lombok.*;
 
 @Data
@@ -15,11 +11,11 @@ public class UsuariosDTO {
 
     private  Long idUsuario;
 
-    private  String Nombre;
+    private  String nombre;
 
-    private  String Apellido;
+    private  String apellido;
 
-    private  String Cedula;
+    private  String cedula;
 
-    private Integer Edad;
+    private Integer edad;
 }
