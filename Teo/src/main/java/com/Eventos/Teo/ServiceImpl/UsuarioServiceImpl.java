@@ -5,23 +5,19 @@ import com.Eventos.Teo.DTO.UsuariosDTO;
 import com.Eventos.Teo.Model.Usuarios;
 import com.Eventos.Teo.repositorios.UsuarioRepositorio;
 import com.Eventos.Teo.servicios.UsuarioServicio;
+import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-
+@RequiredArgsConstructor
 public class UsuarioServiceImpl implements UsuarioServicio {
 
-
-
-    @Autowired
-    UsuarioRepositorio usuarioRepositorio;
-    @Autowired
-    ModelMapper modelMapper;
+    private final UsuarioRepositorio usuarioRepositorio;
+    private final ModelMapper modelMapper;
 
     @Override
     public List<UsuariosDTO> listartodos() {
@@ -46,7 +42,7 @@ public class UsuarioServiceImpl implements UsuarioServicio {
 
             usuarioRepositorio.deleteById(id);
         }else{
-            throw new RuntimeException("No se puedo");
+            throw new RuntimeException("No se pudo eliminar el usuario");
         }
 
     }

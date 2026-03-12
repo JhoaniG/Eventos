@@ -7,6 +7,4 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UsuarioRepositorio extends JpaRepository<Usuarios, Long> {
 
-
-    // COnsultas personalisadas
 }
