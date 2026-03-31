@@ -1,0 +1,19 @@
+version: "3.8"
+services:
+  mysql-db:
+    image: mysql:8.0
+    container_name: eventos-mysql
+    # Descomenta la siguiente línea si quieres que la base de datos se reinicie automáticamente
+    # restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_USER: ${DB_USERNAME}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - "3306:3306" # El puerto estándar de MySQL
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+volumes: # El volumen para que los datos no se pierdan si apagas el contenedor
+  mysql_data:

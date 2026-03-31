@@ -42,7 +42,7 @@ public class UsuarioServiceImpl implements UsuarioServicio {
 
             usuarioRepositorio.deleteById(id);
         }else{
-            throw new RuntimeException("No se pudo eliminar el usuario");
+            throw new RuntimeException("Usuario no encontrado con id: " + id); // Idealmente, usar una excepción personalizada como ResourceNotFoundException para devolver un 404.
         }
 
     }
