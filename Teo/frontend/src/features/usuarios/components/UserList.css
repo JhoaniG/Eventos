@@ -1,0 +1,17 @@
+.user-cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  padding: 20px;
+}
+
+.user-list-message {
+  text-align: center;
+  padding: 20px;
+  font-size: 1.2em;
+  color: #555;
+}
+.user-list-message.error {
+  color: #d9534f; /* Un color rojo para errores */
+}
