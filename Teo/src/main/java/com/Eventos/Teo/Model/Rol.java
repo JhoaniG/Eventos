@@ -15,7 +15,7 @@ import org.springframework.data.annotation.Id;
 public class Rol {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_Rol")
+    @Column(name = "id_Rol",unique = true, nullable = false)
     private Long id;
     @Column(name="Rol", length =  50, nullable = false)
     private String rol;
