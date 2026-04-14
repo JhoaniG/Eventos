@@ -20,6 +20,7 @@ public class UsuarioServiceImpl implements UsuarioServicio {
 
     private final UsuarioRepositorio usuarioRepositorio;
     private final ModelMapper modelMapper;
+    private final UploadFileService uploadFileService;
 
     @Override
     public List<UsuariosDTO> listartodos() {
@@ -32,12 +33,10 @@ public class UsuarioServiceImpl implements UsuarioServicio {
     @Override
     public UsuariosDTO guardar(UsuariosDTO usuariosDTO, MultipartFile archivo) {
         Usuarios usuarios=modelMapper.map(usuariosDTO, Usuarios.class);
-        if(archivo!=null && !archivo.isEmpty()){
-            String nombreFoto = System.currentTimeMillis() + "_" + archivo.getOriginalFilename();
-            // Lógica para guardar el archivo físicamente (ver nota abajo)
+        // --- AQUÍ USAMOS EL SERVICIO ---
+        if (archivo != null && !archivo.isEmpty()) {
+            String nombreFoto = uploadFileService.guardarArchivo(archivo);
             usuarios.setFoto(nombreFoto);
-
-
         }
         if (usuariosDTO.getIdRol()!=null){
             Rol rol=new Rol();
@@ -65,10 +64,14 @@ public class UsuarioServiceImpl implements UsuarioServicio {
                 usuarioExistente.setRol(rol);
             }
 
-            // Actualizar Foto si viene una nueva
+            // --- ACTUALIZAR FOTO ---
             if (archivo != null && !archivo.isEmpty()) {
-                String nombreFoto = System.currentTimeMillis() + "_" + archivo.getOriginalFilename();
-                usuarioExistente.setFoto(nombreFoto);
+                // Opcional: Borrar la foto vieja para no gastar espacio
+                if (usuarioExistente.getFoto() != null) {
+                    uploadFileService.eliminarArchivo(usuarioExistente.getFoto());
+                }
+                String nuevoNombre = uploadFileService.guardarArchivo(archivo);
+                usuarioExistente.setFoto(nuevoNombre);
             }
 
             Usuarios actualizado = usuarioRepositorio.save(usuarioExistente);
@@ -79,12 +82,14 @@ public class UsuarioServiceImpl implements UsuarioServicio {
 
     @Override
     public void eliminar(Long id) {
-        if (usuarioRepositorio.existsById(id)){
+        Usuarios usuario = usuarioRepositorio.findById(id)
+                .orElseThrow(() -> new RuntimeException("No se pudo encontrar el usuario"));
 
-            usuarioRepositorio.deleteById(id);
-        }else{
-            throw new RuntimeException("No se pudo eliminar el usuario");
+        // 1. Borrar la foto física primero
+        if (usuario.getFoto() != null) {
+            uploadFileService.eliminarArchivo(usuario.getFoto());
         }
 
-    }
-}
+        // 2. Borrar el registro de la base de datos
+        usuarioRepositorio.deleteById(id);
+    }}
