@@ -17,6 +17,7 @@ import org.hibernate.Length;
 public class Usuarios {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_Usuario", nullable = false)
     private  Long idUsuario;
     @Column(name = "nombre", length = 30, nullable = false)
     private  String Nombre;
@@ -26,5 +27,10 @@ public class Usuarios {
     private  String Cedula;
     @Column(name = "edad", nullable = false)
     private Integer Edad;
+    @Column(name = "foto")
+    private  String Foto;
+    @ManyToOne
+    @JoinColumn(name = "id_Rol", nullable = false)
+    private Rol rol;
 
 }

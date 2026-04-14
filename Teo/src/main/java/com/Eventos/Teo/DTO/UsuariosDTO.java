@@ -18,4 +18,6 @@ public class UsuariosDTO {
     private  String cedula;
 
     private Integer edad;
+    private String foto; // Nombre de la imagen para el Front
+    private Long idRol;
 }

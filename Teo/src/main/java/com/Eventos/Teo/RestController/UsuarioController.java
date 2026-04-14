@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -29,9 +30,19 @@ public class UsuarioController {
 
     // POST: http://localhost:8080/api/usuarios
     @PostMapping
-    public ResponseEntity<UsuariosDTO> guardar(@RequestBody UsuariosDTO usuariosDTO) {
-        UsuariosDTO nuevoUsuario = usuarioServicio.guardar(usuariosDTO);
-        return new ResponseEntity<>(nuevoUsuario, HttpStatus.CREATED);
+    public ResponseEntity<UsuariosDTO> guardar(
+            @ModelAttribute UsuariosDTO usuariosDTO,
+            @RequestParam(value = "archivo", required = false) MultipartFile archivo) {
+        return new ResponseEntity<>(usuarioServicio.guardar(usuariosDTO, archivo), HttpStatus.CREATED);
+    }
+
+    // PUT: Para editar
+    @PutMapping("/{id}")
+    public ResponseEntity<UsuariosDTO> actualizar(
+            @PathVariable Long id,
+            @ModelAttribute UsuariosDTO usuariosDTO,
+            @RequestParam(value = "archivo", required = false) MultipartFile archivo) {
+        return ResponseEntity.ok(usuarioServicio.actualizar(id, usuariosDTO, archivo));
     }
 
     // DELETE: http://localhost:8080/api/usuarios/1
