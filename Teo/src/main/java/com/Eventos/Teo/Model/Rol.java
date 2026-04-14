@@ -2,7 +2,6 @@ package com.Eventos.Teo.Model;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.springframework.data.annotation.Id;
 
 
 @Table(name = "Roles")
@@ -11,7 +10,6 @@ import org.springframework.data.annotation.Id;
 @NoArgsConstructor
 @Getter
 @Setter
-
 public class Rol {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
