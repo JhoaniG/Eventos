@@ -25,6 +25,7 @@ public class UsuarioController {
     // GET: http://localhost:8080/api/usuarios
     @GetMapping
     public ResponseEntity<List<UsuariosDTO>> listar() {
+
         return ResponseEntity.ok(usuarioServicio.listartodos());
     }
 

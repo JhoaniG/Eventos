@@ -26,4 +26,6 @@ public class JugadoresDTO {
 
     private Long idUsuario;
 
+    private Long idEquipo;
+
 }

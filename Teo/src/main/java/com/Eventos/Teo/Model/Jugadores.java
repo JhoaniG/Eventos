@@ -36,6 +36,7 @@ public class Jugadores {
     @ManyToOne
     @JoinColumn(name = "id_Usuario", nullable = false, unique = true)
     private Usuarios usuarios;
-
-
+    @ManyToOne
+    @JoinColumn(name = "id_Equipo", nullable = false, unique = true)
+    private Equipo equipo;
 }
