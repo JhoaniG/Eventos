@@ -22,13 +22,13 @@ public class Partido {
     @Column(name = "estado", nullable = false)
     private String estado;
     @Column(name = "marcadorLocal", nullable = false)
-    private String marcadorLocal;
+    private Integer marcadorLocal;
     @Column(name = "marcadorVisitante", nullable = false)
-    private String marcadorVisitante;
+    private Integer marcadorVisitante;
     @ManyToOne
-    @JoinColumn(name = "id_Equipo_Visitante", nullable = false, unique = true)
+    @JoinColumn(name = "id_Equipo_Visitante", nullable = false)
     private Equipo equipoVisitante;
     @ManyToOne
-    @JoinColumn(name = "id_Equipo_Local", nullable = false, unique = true)
+    @JoinColumn(name = "id_Equipo_Local", nullable = false)
     private Equipo equipoLocal;
 }

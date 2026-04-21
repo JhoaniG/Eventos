@@ -34,9 +34,9 @@ public class Jugadores {
     @Column(name = "goles", nullable = true)
     private String goles;
     @ManyToOne
-    @JoinColumn(name = "id_Usuario", nullable = false, unique = true)
+    @JoinColumn(name = "id_Usuario", nullable = false)
     private Usuarios usuarios;
     @ManyToOne
-    @JoinColumn(name = "id_Equipo", nullable = false, unique = true)
+    @JoinColumn(name = "id_Equipo", nullable = false)
     private Equipo equipo;
 }
